@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const path = require("path");
 const session = require("express-session");
@@ -19,7 +21,7 @@ app.use(express.json());
 // Session
 app.use(
     session({
-        secret: "spacex_secret_key",
+        secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false
     })
@@ -43,7 +45,7 @@ app.get("/", (req, res) => {
 });
 
 // Server
-const PORT = 3021;
+const PORT = process.env.PORT || 3021;
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
